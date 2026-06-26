@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useStore } from '../store/useStore';
-import { Search, Bell, CheckCircle2, Filter, ArrowUpDown, LogOut } from 'lucide-react';
+import { Search, Bell, CheckCircle2, Filter, ArrowUpDown, LogOut, ThumbsUp } from 'lucide-react';
 
 const AdminDashboard = () => {
     const [username, setUsername] = useState('');
@@ -157,8 +157,11 @@ const AdminDashboard = () => {
                                                             {issue.wardOrDistrict}
                                                         </span>
                                                     )}
-                                                    <span className="text-xs text-slate-400 ml-2 font-mono">
+                                                    <span className="text-xs text-slate-400 ml-2 font-mono flex items-center gap-2">
                                                         {new Date(issue.createdAt).toLocaleDateString()}
+                                                        <span className="flex items-center gap-1 text-indigo-400 font-bold ml-2">
+                                                            <ThumbsUp size={12}/> {issue.upvotes || 0}
+                                                        </span>
                                                     </span>
                                                 </div>
                                             </div>
