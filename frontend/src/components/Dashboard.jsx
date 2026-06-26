@@ -33,14 +33,14 @@ const Dashboard = () => {
     <div className="relative w-full h-[100dvh] overflow-hidden bg-background pointer-events-auto">
       
       {/* Map Control Overlays */}
-      <div className="absolute top-24 left-6 md:left-12 right-6 z-20 pointer-events-none flex justify-between items-start">
-        <div className="pointer-events-auto backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-4 flex items-center gap-4 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
-          <div className="flex items-center gap-2 px-3 py-1 bg-rose-500/20 border border-rose-500/30 rounded-full">
-            <div className="w-2 h-2 bg-rose-500 rounded-full animate-pulse" />
-            <span className="text-[10px] font-bold uppercase tracking-widest text-rose-400">{criticalCount} Critical</span>
+      <div className="absolute top-20 md:top-24 left-4 md:left-12 z-20 pointer-events-none flex justify-between items-start">
+        <div className="pointer-events-auto backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl md:rounded-2xl p-2.5 md:p-4 flex items-center gap-3 md:gap-4 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
+          <div className="flex items-center gap-2 px-2 md:px-3 py-1 bg-rose-500/20 border border-rose-500/30 rounded-full">
+            <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-rose-500 rounded-full animate-pulse" />
+            <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-rose-400">{criticalCount} Critical</span>
           </div>
-          <div className="h-4 w-px bg-white/10" />
-          <span className="text-sm font-medium text-slate-300">Active sweeps</span>
+          <div className="h-3 md:h-4 w-px bg-white/10" />
+          <span className="text-xs md:text-sm font-medium text-slate-300">Active sweeps</span>
         </div>
       </div>
 
