@@ -12,7 +12,8 @@ const Dashboard = () => {
     upvoteIssue
   } = useStore();
 
-  const [selectedIssue, setSelectedIssue] = useState(null);
+  const [selectedIssueId, setSelectedIssueId] = useState(null);
+  const selectedIssue = issues.find(i => i._id === selectedIssueId);
 
   const handleMapClick = (e) => {
     if (needsManualLocation) {
@@ -22,7 +23,7 @@ const Dashboard = () => {
       });
       setReportFormOpen(true);
     } else {
-      setSelectedIssue(null);
+      setSelectedIssueId(null);
     }
   };
 
@@ -57,7 +58,7 @@ const Dashboard = () => {
         manualLocation={manualLocation} 
         handleUpvote={upvoteIssue} 
         selectedIssue={selectedIssue}
-        setSelectedIssue={setSelectedIssue}
+        setSelectedIssue={(issue) => setSelectedIssueId(issue ? issue._id : null)}
       />
       
       {/* InfoWindow / Issue Detail Popup Overlay */}
@@ -71,7 +72,7 @@ const Dashboard = () => {
                 className="w-full h-full object-cover" 
               />
               <button 
-                onClick={() => setSelectedIssue(null)}
+                onClick={() => setSelectedIssueId(null)}
                 className="absolute top-4 right-4 w-8 h-8 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-black/60 text-white"
               >
                 <X size={16} />

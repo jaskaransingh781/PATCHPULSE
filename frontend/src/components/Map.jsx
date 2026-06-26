@@ -87,7 +87,7 @@ const Map = ({ issues, onMapClick, manualLocation, handleUpvote, selectedIssue, 
       )}
 
       {/* Clustered Issue Markers */}
-      <MarkerClusterer options={{ maxZoom: 18 }}>
+      <MarkerClusterer>
         {(clusterer) => (
           <>
             {issues.map((issue, index) => {
