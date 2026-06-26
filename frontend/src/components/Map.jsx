@@ -87,21 +87,28 @@ const Map = ({ issues, onMapClick, manualLocation, handleUpvote, selectedIssue, 
       )}
 
       {/* Clustered Issue Markers */}
-      <MarkerClusterer>
+      <MarkerClusterer options={{ maxZoom: 18 }}>
         {(clusterer) => (
           <>
-            {issues.map(issue => (
-              <Marker
-                key={issue._id}
-                position={{
-                  lat: issue.location.coordinates[1],
-                  lng: issue.location.coordinates[0]
-                }}
-                icon={getMarkerIcon(issue.severity, issue.status)}
-                clusterer={clusterer}
-                onClick={() => setSelectedIssue(issue)}
-              />
-            ))}
+            {issues.map((issue, index) => {
+              // Add a tiny micro-offset based on index to prevent perfect overlapping of identical coordinates
+              // This ensures that when zoomed in completely, you can see and click individual markers
+              const latOffset = (index % 5) * 0.00002;
+              const lngOffset = (index % 3) * 0.00002;
+              
+              return (
+                <Marker
+                  key={issue._id}
+                  position={{
+                    lat: issue.location.coordinates[1] + latOffset,
+                    lng: issue.location.coordinates[0] + lngOffset
+                  }}
+                  icon={getMarkerIcon(issue.severity, issue.status)}
+                  clusterer={clusterer}
+                  onClick={() => setSelectedIssue(issue)}
+                />
+              );
+            })}
           </>
         )}
       </MarkerClusterer>
