@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useStore } from '../store/useStore';
 import { Radar, Bell, WifiOff, Map, BarChart3, Shield, Settings, HelpCircle, Plus } from 'lucide-react';
@@ -6,6 +6,7 @@ import ReportBottomSheet from './ReportBottomSheet';
 
 const AppShell = ({ children }) => {
   const location = useLocation();
+  const [isSupportOpen, setIsSupportOpen] = useState(false);
   const { 
     setReportFormOpen, 
     setManualLocation,
@@ -100,10 +101,10 @@ const AppShell = ({ children }) => {
             <Settings size={20} />
             <span className="font-label-caps text-label-caps">Settings</span>
           </Link>
-          <a href="#" className="flex items-center gap-sm p-3 rounded-xl text-on-surface-variant hover:bg-white/10 hover:text-primary transition-colors">
+          <button onClick={() => setIsSupportOpen(true)} className="w-full flex items-center gap-sm p-3 rounded-xl text-on-surface-variant hover:bg-white/10 hover:text-primary transition-colors">
             <HelpCircle size={20} />
             <span className="font-label-caps text-label-caps">Support</span>
-          </a>
+          </button>
         </div>
       </nav>
 
@@ -150,6 +151,37 @@ const AppShell = ({ children }) => {
 
       {/* New Report Bottom Sheet */}
       <ReportBottomSheet />
+
+      {/* Support Modal */}
+      {isSupportOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md pointer-events-auto">
+          <div className="bg-[#0f131d] border border-white/10 p-8 rounded-3xl max-w-sm w-full shadow-[0_8px_32px_0_rgba(0,0,0,0.5)] animate-in zoom-in-95 duration-200 text-center">
+            <div className="w-16 h-16 bg-indigo-500/10 rounded-2xl mx-auto flex items-center justify-center mb-4 border border-indigo-500/20">
+              <HelpCircle className="text-indigo-400" size={32} />
+            </div>
+            <h2 className="text-2xl font-bold text-white mb-2">PatchPulse Support</h2>
+            <p className="text-slate-400 text-sm mb-6 leading-relaxed">
+              For assistance, feedback, or inquiries regarding the PatchPulse platform, please reach out to your local civic administrator.
+            </p>
+            
+            <div className="px-4 py-4 rounded-2xl bg-gradient-to-br from-indigo-500/10 to-purple-500/5 border border-white/10 text-center shadow-inner mb-6">
+              <p className="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">
+                Built with <span className="text-rose-500 animate-pulse inline-block">❤️</span> by
+              </p>
+              <a href="https://github.com/jaskaransingh781" target="_blank" rel="noreferrer" className="text-lg font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400 tracking-tight hover:opacity-80 transition-opacity">
+                Jaskaran Singh
+              </a>
+            </div>
+
+            <button 
+              onClick={() => setIsSupportOpen(false)}
+              className="w-full py-3 bg-white/5 border border-white/10 hover:bg-white/10 text-white rounded-xl font-bold transition-all active:scale-95"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
       
     </div>
   );
