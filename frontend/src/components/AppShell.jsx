@@ -42,12 +42,12 @@ const AppShell = ({ children }) => {
           <h1 className="font-headline-md text-headline-md font-bold text-primary tracking-tight">PatchPulse</h1>
         </div>
         <div className="flex items-center gap-sm">
-          <button className="p-2 rounded-full hover:bg-white/10 transition-all duration-200 text-primary">
-            <Bell size={20} />
+          <button onClick={() => setIsSupportOpen(true)} className="p-2 rounded-full hover:bg-white/10 transition-all duration-200 text-primary">
+            <HelpCircle size={20} />
           </button>
-          <button className="p-2 rounded-full hover:bg-white/10 transition-all duration-200 text-primary">
-            <WifiOff size={20} />
-          </button>
+          <Link to="/settings" className="p-2 rounded-full hover:bg-white/10 transition-all duration-200 text-primary">
+            <Settings size={20} />
+          </Link>
         </div>
       </header>
 
