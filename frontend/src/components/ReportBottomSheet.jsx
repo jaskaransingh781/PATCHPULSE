@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { useStore } from '../store/useStore';
-import { Camera, MapPin, Sparkles, Send, X, ShieldAlert, Loader2 } from 'lucide-react';
+import { Camera, MapPin, Sparkles, Send, X, ShieldAlert, Loader2, Mic } from 'lucide-react';
 import { queueImageUpload } from '../utils/indexedDB.js';
 
 /**
@@ -22,7 +22,34 @@ const ReportBottomSheet = () => {
   
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState('');
+  const [isRecording, setIsRecording] = useState(false);
   const fileInputRef = useRef(null);
+
+  const startRecording = () => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      alert("Your browser does not support voice input.");
+      return;
+    }
+    const recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = 'en-US';
+
+    recognition.onstart = () => setIsRecording(true);
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      setForm(prev => ({ ...prev, description: prev.description + (prev.description ? ' ' : '') + transcript }));
+    };
+    recognition.onerror = (event) => {
+      console.error(event.error);
+      setIsRecording(false);
+    };
+    recognition.onend = () => setIsRecording(false);
+    
+    recognition.start();
+  };
+
   const handleGpsFetch = () => {
     if (!navigator.geolocation) {
       alert("Geolocation is not supported by your browser");
@@ -242,13 +269,23 @@ const ReportBottomSheet = () => {
                 onChange={handleImageCapture}
                 className="hidden" 
               />
-              <textarea 
-                className="flex-1 bg-white/5 border border-white/10 rounded-2xl p-4 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-indigo-500/50 transition-all resize-none"
-                placeholder="Provide any additional details about the hazard..."
-                rows="3"
-                value={form.description}
-                onChange={(e) => setForm({ ...form, description: e.target.value })}
-              />
+              <div className="flex-1 relative">
+                <textarea 
+                  className="w-full h-full bg-white/5 border border-white/10 rounded-2xl p-4 pr-12 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-indigo-500/50 transition-all resize-none"
+                  placeholder="Provide any additional details about the hazard..."
+                  rows="3"
+                  value={form.description}
+                  onChange={(e) => setForm({ ...form, description: e.target.value })}
+                />
+                <button
+                  type="button"
+                  onClick={startRecording}
+                  title="Use Microphone"
+                  className={`absolute bottom-3 right-3 p-2 rounded-full transition-all ${isRecording ? 'bg-red-500/20 text-red-500 animate-pulse' : 'bg-white/10 text-slate-400 hover:bg-indigo-500/20 hover:text-indigo-400'}`}
+                >
+                  <Mic size={16} />
+                </button>
+              </div>
             </div>
 
             {/* AI Insight Box */}
