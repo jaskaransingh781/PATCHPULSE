@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { useStore } from '../store/useStore';
-import { Camera, MapPin, Sparkles, Send, X, ShieldAlert, Loader2, Mic } from 'lucide-react';
+import { Camera, MapPin, Sparkles, Send, X, ShieldAlert, Loader2, Mic, Check } from 'lucide-react';
 import { queueImageUpload } from '../utils/indexedDB.js';
 
 /**
@@ -319,10 +319,10 @@ const ReportBottomSheet = () => {
                 <button
                   type="button"
                   onClick={toggleRecording}
-                  title="Use Microphone"
-                  className={`absolute bottom-3 right-3 p-2 rounded-full transition-all ${isRecording ? 'bg-red-500/20 text-red-500 animate-pulse' : 'bg-white/10 text-slate-400 hover:bg-indigo-500/20 hover:text-indigo-400'}`}
+                  title={isRecording ? "Stop Recording" : "Use Microphone"}
+                  className={`absolute bottom-3 right-3 p-2 rounded-full transition-all ${isRecording ? 'bg-emerald-500/20 text-emerald-400 animate-pulse border border-emerald-500/30' : 'bg-white/10 text-slate-400 hover:bg-indigo-500/20 hover:text-indigo-400 border border-transparent'}`}
                 >
-                  <Mic size={16} />
+                  {isRecording ? <Check size={16} /> : <Mic size={16} />}
                 </button>
               </div>
             </div>
