@@ -44,7 +44,7 @@ const ReportBottomSheet = () => {
     recognitionRef.current = recognition;
     recognition.continuous = true;
     recognition.interimResults = true;
-    recognition.lang = 'en-US';
+    // Removed hardcoded 'en-US' so it defaults to the user's native device language
 
     let finalTranscript = form.description;
 
