@@ -72,7 +72,11 @@ const ReportBottomSheet = () => {
     
     recognition.onerror = (event) => {
       console.error('Speech recognition error', event.error);
-      alert(`Microphone Error: ${event.error} (Please check browser permissions)`);
+      if (event.error === 'network') {
+        alert("Microphone Error: Network. This usually happens if you are using Brave, Firefox, or an in-app browser that blocks Google's speech servers. Please try using official Chrome or Safari.");
+      } else {
+        alert(`Microphone Error: ${event.error} (Please check browser permissions)`);
+      }
       setIsRecording(false);
     };
     
