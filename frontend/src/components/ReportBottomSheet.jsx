@@ -72,6 +72,7 @@ const ReportBottomSheet = () => {
     
     recognition.onerror = (event) => {
       console.error('Speech recognition error', event.error);
+      alert(`Microphone Error: ${event.error} (Please check browser permissions)`);
       setIsRecording(false);
     };
     
