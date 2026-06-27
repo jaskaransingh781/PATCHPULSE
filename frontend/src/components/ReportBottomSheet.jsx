@@ -335,7 +335,7 @@ const ReportBottomSheet = () => {
               <div>
                 <p className="text-xs font-bold text-indigo-200">AI Duplicate Analysis</p>
                 <p className="text-xs text-indigo-100/70 mt-1 leading-relaxed">
-                  Scanning 500m radius... No identical reports found. This will be marked as a <span className="text-indigo-300 font-bold uppercase">New Unique Incident</span>.
+                  Upon submission, AI will scan a 50m radius. If a duplicate image is detected, it will automatically be merged as an <span className="text-indigo-300 font-bold uppercase">Upvote</span>.
                 </p>
               </div>
             </div>
