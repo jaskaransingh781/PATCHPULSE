@@ -34,12 +34,12 @@ const Dashboard = () => {
       
       {/* Map Control Overlays */}
       <div className="absolute top-[72px] md:top-24 left-2 md:left-12 z-20 pointer-events-none">
-        <div className="pointer-events-auto backdrop-blur-xl bg-[#0f131d]/80 border border-white/10 rounded-full md:rounded-2xl p-1.5 md:p-4 flex items-center gap-2 md:gap-4 shadow-lg">
+        <div className="pointer-events-auto backdrop-blur-xl bg-surface/80 border border-outline/20 rounded-full md:rounded-2xl p-1.5 md:p-4 flex items-center gap-2 md:gap-4 shadow-lg">
           <div className="flex items-center gap-1.5 px-2 md:px-3 py-1 bg-rose-500/20 border border-rose-500/30 rounded-full">
             <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-rose-500 rounded-full animate-pulse" />
             <span className="text-[10px] font-bold uppercase tracking-widest text-rose-400">{criticalCount}</span>
           </div>
-          <span className="text-[11px] md:text-sm font-semibold text-slate-300 pr-2">Sweeps</span>
+          <span className="text-[11px] md:text-sm font-semibold text-on-surface-variant pr-2">Sweeps</span>
         </div>
       </div>
 
@@ -63,7 +63,7 @@ const Dashboard = () => {
       {/* InfoWindow / Issue Detail Popup Overlay */}
       {selectedIssue && (
         <div className="absolute bottom-32 md:bottom-auto md:top-24 right-6 z-30 w-[calc(100%-48px)] md:w-96 animate-in slide-in-from-right duration-500 pointer-events-auto">
-          <div className="backdrop-blur-2xl bg-white/10 border border-white/20 rounded-3xl overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.5)]">
+          <div className="backdrop-blur-2xl bg-surface/80 dark:bg-white/10 border border-outline/20 dark:border-white/20 rounded-3xl overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.2)] dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.5)]">
             <div className="relative h-48 bg-slate-800">
               <img 
                 src={selectedIssue.mediaUrl?.startsWith('/') ? `http://localhost:5000${selectedIssue.mediaUrl}` : (selectedIssue.mediaUrl || 'https://images.unsplash.com/photo-1517649763962-0c623066013b')} 
@@ -88,8 +88,8 @@ const Dashboard = () => {
 
             <div className="p-6 space-y-4">
               <div>
-                <h3 className="text-xl font-bold text-white">{selectedIssue.category}</h3>
-                <p className="text-sm text-slate-400 mt-1">{selectedIssue.aiDescription}</p>
+                <h3 className="text-xl font-bold text-on-surface">{selectedIssue.category}</h3>
+                <p className="text-sm text-on-surface-variant mt-1">{selectedIssue.aiDescription}</p>
               </div>
 
               <div className="bg-indigo-500/10 border border-indigo-500/20 rounded-2xl p-4 space-y-2">
@@ -103,7 +103,7 @@ const Dashboard = () => {
               </div>
 
               <div className="flex items-center justify-between pt-2">
-                <div className="flex items-center gap-4 text-slate-400 text-sm">
+                <div className="flex items-center gap-4 text-on-surface-variant text-sm">
                   <div className="flex items-center gap-1.5">
                     <Navigation size={14} />
                     <span>Location Logged</span>
@@ -111,7 +111,7 @@ const Dashboard = () => {
                 </div>
                 <button 
                   onClick={() => upvoteIssue(selectedIssue._id)}
-                  className="flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 text-white px-4 py-2 rounded-xl transition-all active:scale-95"
+                  className="flex items-center gap-2 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 border border-outline/20 text-on-surface px-4 py-2 rounded-xl transition-all active:scale-95"
                 >
                   <ThumbsUp size={16} />
                   <span className="font-bold">{selectedIssue.upvotes || 0}</span>

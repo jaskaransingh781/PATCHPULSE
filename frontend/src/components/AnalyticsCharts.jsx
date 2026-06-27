@@ -112,15 +112,15 @@ const AnalyticsCharts = () => {
   }
 
   if (!data) {
-    return <div className="text-center text-slate-400 py-10">No analytics data available.</div>;
+    return <div className="text-center text-on-surface-variant py-10">No analytics data available.</div>;
   }
 
   return (
     <div className="flex-1 flex flex-col h-full overflow-y-auto">
       <div className="p-6 md:p-12 md:pl-24 max-w-7xl mx-auto space-y-10 w-full animate-in fade-in duration-700 pb-28 md:pb-12">
         <header>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white">Command Analytics</h1>
-          <p className="text-slate-400 mt-2 text-lg">Real-time civic infrastructure performance metrics.</p>
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-on-surface">Command Analytics</h1>
+          <p className="text-on-surface-variant mt-2 text-lg">Real-time civic infrastructure performance metrics.</p>
         </header>
 
         {/* Hero Stats */}
@@ -174,7 +174,7 @@ const AnalyticsCharts = () => {
                     ))}
                   </Pie>
                   <Tooltip 
-                    contentStyle={{ backgroundColor: 'rgba(15, 23, 42, 0.9)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 8px 32px rgba(0,0,0,0.5)', color: '#fff' }} 
+                    contentStyle={{ backgroundColor: 'rgba(15, 23, 42, 0.9)', borderRadius: '12px', border: '1px solid rgba(var(--color-outline), 0.2)', boxShadow: '0 8px 32px rgba(0,0,0,0.5)', color: '#fff' }} 
                     itemStyle={{ color: '#fff', fontWeight: 'bold' }}
                   />
                   <Legend iconType="circle" wrapperStyle={{ paddingTop: '20px' }} />
@@ -191,12 +191,12 @@ const AnalyticsCharts = () => {
                   data={data.bySeverity}
                   margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
                 >
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" vertical={false} />
-                  <XAxis dataKey="name" stroke="rgba(255,255,255,0.4)" tick={{fill: 'rgba(255,255,255,0.4)', fontSize: 12}} axisLine={false} tickLine={false} dy={10} />
-                  <YAxis stroke="rgba(255,255,255,0.4)" tick={{fill: 'rgba(255,255,255,0.4)', fontSize: 12}} axisLine={false} tickLine={false} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(var(--color-outline), 0.2)" vertical={false} />
+                  <XAxis dataKey="name" stroke="rgba(var(--color-on-surface), 0.4)" tick={{fill: 'rgba(var(--color-on-surface), 0.4)', fontSize: 12}} axisLine={false} tickLine={false} dy={10} />
+                  <YAxis stroke="rgba(var(--color-on-surface), 0.4)" tick={{fill: 'rgba(var(--color-on-surface), 0.4)', fontSize: 12}} axisLine={false} tickLine={false} />
                   <Tooltip 
-                    cursor={{ fill: 'rgba(255,255,255,0.05)' }} 
-                    contentStyle={{ backgroundColor: 'rgba(15, 23, 42, 0.9)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 8px 32px rgba(0,0,0,0.5)', color: '#fff' }} 
+                    cursor={{ fill: 'rgba(var(--color-on-surface), 0.05)' }} 
+                    contentStyle={{ backgroundColor: 'rgba(15, 23, 42, 0.9)', borderRadius: '12px', border: '1px solid rgba(var(--color-outline), 0.2)', boxShadow: '0 8px 32px rgba(0,0,0,0.5)', color: '#fff' }} 
                     itemStyle={{ color: '#fff', fontWeight: 'bold' }}
                   />
                   <Bar dataKey="value" name="Issues" fill="#6366f1" radius={[6, 6, 0, 0]} barSize={40}>
@@ -207,9 +207,9 @@ const AnalyticsCharts = () => {
                 </BarChart>
               </ResponsiveContainer>
             </div>
-            <div className="flex items-center gap-4 mt-4 pt-6 border-t border-white/5">
+            <div className="flex items-center gap-4 mt-4 pt-6 border-t border-outline/10">
               <Activity size={16} className="text-indigo-400" />
-              <span className="text-xs text-slate-400 leading-relaxed">
+              <span className="text-xs text-on-surface-variant leading-relaxed">
                 Detection rates are up <span className="text-indigo-300 font-bold">14%</span> this week due to increased AI sweep frequency.
               </span>
             </div>
@@ -223,30 +223,30 @@ const AnalyticsCharts = () => {
 
 // Extracted from the mockup
 const MetricCard = ({ label, value, change, trend, icon, color }) => (
-  <div className="backdrop-blur-xl bg-white/5 border border-white/10 p-6 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.2)] hover:bg-white/10 transition-colors group">
+  <div className="backdrop-blur-xl bg-black/5 dark:bg-white/5 border border-outline/20 p-6 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.2)] hover:bg-black/10 dark:hover:bg-white/10 transition-colors group">
     <div className="flex items-center justify-between">
       <div className={`p-3 rounded-2xl bg-${color}-500/10 border border-${color}-500/20 group-hover:scale-110 transition-transform`}>
         {icon}
       </div>
-      <div className={`flex items-center gap-1 text-sm font-bold ${trend === 'up' ? 'text-emerald-400' : 'text-rose-400'}`}>
+      <div className={`flex items-center gap-1 text-sm font-bold ${trend === 'up' ? 'text-emerald-500 dark:text-emerald-400' : 'text-rose-500 dark:text-rose-400'}`}>
         {trend === 'up' ? <TrendingUp size={14} /> : <TrendingUp size={14} className="rotate-180" />}
         {change}
       </div>
     </div>
     <div className="mt-6">
-      <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">{label}</p>
-      <p className="text-3xl font-bold mt-1 tracking-tight text-white">{value}</p>
+      <p className="text-sm font-bold text-on-surface-variant uppercase tracking-widest">{label}</p>
+      <p className="text-3xl font-bold mt-1 tracking-tight text-on-surface">{value}</p>
     </div>
   </div>
 );
 
 const ChartContainer = ({ title, icon, children }) => (
-  <div className="backdrop-blur-xl bg-white/5 border border-white/10 p-8 rounded-[32px] shadow-[0_8px_32px_0_rgba(0,0,0,0.2)] flex flex-col">
+  <div className="backdrop-blur-xl bg-black/5 dark:bg-white/5 border border-outline/20 p-8 rounded-[32px] shadow-[0_8px_32px_0_rgba(0,0,0,0.2)] flex flex-col">
     <div className="flex items-center gap-3 mb-8">
-      <div className="p-2 bg-white/5 rounded-xl text-slate-400">
+      <div className="p-2 bg-black/5 dark:bg-white/5 rounded-xl text-on-surface-variant">
         {icon}
       </div>
-      <h3 className="text-xl font-bold text-white">{title}</h3>
+      <h3 className="text-xl font-bold text-on-surface">{title}</h3>
     </div>
     {children}
   </div>

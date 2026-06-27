@@ -36,23 +36,23 @@ const AppShell = ({ children }) => {
     <div className="bg-background text-on-background antialiased h-[100dvh] w-full overflow-hidden flex flex-col md:flex-row relative">
       
       {/* Mobile TopAppBar */}
-      <header className="md:hidden fixed top-0 w-full z-50 bg-surface/10 backdrop-blur-xl border-b border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] flex justify-between items-center px-margin-mobile py-4">
+      <header className="md:hidden fixed top-0 w-full z-50 bg-surface/30 backdrop-blur-xl border-b border-black/10 dark:border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] flex justify-between items-center px-margin-mobile py-4">
         <div className="flex items-center gap-sm">
           <Radar className="text-primary" size={28} />
           <h1 className="font-headline-md text-headline-md font-bold text-primary tracking-tight">PatchPulse</h1>
         </div>
         <div className="flex items-center gap-sm">
-          <button onClick={() => setIsSupportOpen(true)} className="p-2 rounded-full hover:bg-white/10 transition-all duration-200 text-primary">
+          <button onClick={() => setIsSupportOpen(true)} className="p-2 rounded-full hover:bg-black/10 dark:hover:bg-white/10 transition-all duration-200 text-primary">
             <HelpCircle size={20} />
           </button>
-          <Link to="/settings" className="p-2 rounded-full hover:bg-white/10 transition-all duration-200 text-primary">
+          <Link to="/settings" className="p-2 rounded-full hover:bg-black/10 dark:hover:bg-white/10 transition-all duration-200 text-primary">
             <Settings size={20} />
           </Link>
         </div>
       </header>
 
       {/* Desktop SideNavBar */}
-      <nav className="hidden md:flex flex-col h-screen w-sidebar-width fixed left-0 top-0 bg-surface/10 backdrop-blur-xl border-r border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] p-md gap-lg z-40">
+      <nav className="hidden md:flex flex-col h-screen w-sidebar-width fixed left-0 top-0 bg-surface/30 backdrop-blur-xl border-r border-black/10 dark:border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] p-md gap-lg z-40">
         {/* Header */}
         <div className="flex items-center gap-sm mt-xs">
           <div className="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center shrink-0">
@@ -85,7 +85,7 @@ const AppShell = ({ children }) => {
                 className={`flex items-center gap-sm p-3 rounded-xl transition-all ${
                   isActive 
                     ? 'bg-primary text-on-primary font-bold shadow-[0_4px_12px_0_rgba(0,0,0,0.2)] scale-98' 
-                    : 'text-on-surface-variant hover:bg-white/10 hover:text-primary'
+                    : 'text-on-surface-variant hover:bg-black/5 dark:hover:bg-white/10 hover:text-primary'
                 }`}
               >
                 <Icon size={20} className={isActive ? 'fill-current opacity-80' : ''} />
@@ -97,11 +97,11 @@ const AppShell = ({ children }) => {
 
         {/* Footer Tabs */}
         <div className="flex flex-col gap-xs mt-auto">
-          <Link to="/settings" className="flex items-center gap-sm p-3 rounded-xl text-on-surface-variant hover:bg-white/10 hover:text-primary transition-colors">
+          <Link to="/settings" className="flex items-center gap-sm p-3 rounded-xl text-on-surface-variant hover:bg-black/5 dark:hover:bg-white/10 hover:text-primary transition-colors">
             <Settings size={20} />
             <span className="font-label-caps text-label-caps">Settings</span>
           </Link>
-          <button onClick={() => setIsSupportOpen(true)} className="w-full flex items-center gap-sm p-3 rounded-xl text-on-surface-variant hover:bg-white/10 hover:text-primary transition-colors">
+          <button onClick={() => setIsSupportOpen(true)} className="w-full flex items-center gap-sm p-3 rounded-xl text-on-surface-variant hover:bg-black/5 dark:hover:bg-white/10 hover:text-primary transition-colors">
             <HelpCircle size={20} />
             <span className="font-label-caps text-label-caps">Support</span>
           </button>
@@ -114,7 +114,7 @@ const AppShell = ({ children }) => {
       </main>
 
       {/* Mobile BottomNavBar */}
-      <nav className="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-bottom-bar-height bg-surface/10 backdrop-blur-xl border-t border-white/20 shadow-[0_-8px_32px_0_rgba(0,0,0,0.37)] rounded-t-xl">
+      <nav className="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-bottom-bar-height bg-surface/30 backdrop-blur-xl border-t border-black/10 dark:border-white/20 shadow-[0_-8px_32px_0_rgba(0,0,0,0.1)] dark:shadow-[0_-8px_32px_0_rgba(0,0,0,0.37)] rounded-t-xl">
         {navItems.map((item) => {
           const isActive = location.pathname === item.path;
           const Icon = item.icon;
@@ -123,7 +123,7 @@ const AppShell = ({ children }) => {
           if (item.path === '/analytics') {
             return (
               <React.Fragment key="fragment-analytics">
-                <Link to={item.path} className={`flex flex-col items-center justify-center p-2 rounded-lg transition-colors ${isActive ? 'text-primary font-bold' : 'text-on-surface-variant active:bg-white/10'}`}>
+                <Link to={item.path} className={`flex flex-col items-center justify-center p-2 rounded-lg transition-colors ${isActive ? 'text-primary font-bold' : 'text-on-surface-variant active:bg-black/10 dark:active:bg-white/10'}`}>
                   <Icon size={24} className={`mb-1 ${isActive ? 'fill-current opacity-80 scale-110' : ''}`} />
                   <span className="font-label-caps text-label-caps">{item.label}</span>
                 </Link>
@@ -131,7 +131,7 @@ const AppShell = ({ children }) => {
                 <button 
                   key="report-btn"
                   onClick={handleOpenReport}
-                  className="flex flex-col items-center justify-center text-on-surface-variant active:bg-white/10 p-2 rounded-lg transition-colors"
+                  className="flex flex-col items-center justify-center text-on-surface-variant active:bg-black/10 dark:active:bg-white/10 p-2 rounded-lg transition-colors"
                 >
                   <Plus size={24} className="mb-1" />
                   <span className="font-label-caps text-label-caps">Report</span>
@@ -141,7 +141,7 @@ const AppShell = ({ children }) => {
           }
 
           return (
-            <Link key={item.path} to={item.path} className={`flex flex-col items-center justify-center p-2 rounded-lg transition-colors ${isActive ? 'text-primary font-bold' : 'text-on-surface-variant active:bg-white/10'}`}>
+            <Link key={item.path} to={item.path} className={`flex flex-col items-center justify-center p-2 rounded-lg transition-colors ${isActive ? 'text-primary font-bold' : 'text-on-surface-variant active:bg-black/10 dark:active:bg-white/10'}`}>
               <Icon size={24} className={`mb-1 ${isActive ? 'fill-current opacity-80 scale-110' : ''}`} />
               <span className="font-label-caps text-label-caps">{item.label}</span>
             </Link>
@@ -154,28 +154,28 @@ const AppShell = ({ children }) => {
 
       {/* Support Modal */}
       {isSupportOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md pointer-events-auto">
-          <div className="bg-[#0f131d] border border-white/10 p-8 rounded-3xl max-w-sm w-full shadow-[0_8px_32px_0_rgba(0,0,0,0.5)] animate-in zoom-in-95 duration-200 text-center">
-            <div className="w-16 h-16 bg-indigo-500/10 rounded-2xl mx-auto flex items-center justify-center mb-4 border border-indigo-500/20">
-              <HelpCircle className="text-indigo-400" size={32} />
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/20 dark:bg-black/60 backdrop-blur-md pointer-events-auto">
+          <div className="bg-surface border border-outline/20 p-8 rounded-3xl max-w-sm w-full shadow-[0_8px_32px_0_rgba(0,0,0,0.2)] dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.5)] animate-in zoom-in-95 duration-200 text-center">
+            <div className="w-16 h-16 bg-primary/10 rounded-2xl mx-auto flex items-center justify-center mb-4 border border-primary/20">
+              <HelpCircle className="text-primary" size={32} />
             </div>
-            <h2 className="text-2xl font-bold text-white mb-2">PatchPulse Support</h2>
-            <p className="text-slate-400 text-sm mb-6 leading-relaxed">
+            <h2 className="text-2xl font-bold text-on-surface mb-2">PatchPulse Support</h2>
+            <p className="text-on-surface-variant text-sm mb-6 leading-relaxed">
               For assistance, feedback, or inquiries regarding the PatchPulse platform, please reach out to your local civic administrator.
             </p>
             
-            <div className="px-4 py-4 rounded-2xl bg-gradient-to-br from-indigo-500/10 to-purple-500/5 border border-white/10 text-center shadow-inner mb-6">
-              <p className="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">
-                Built with <span className="text-rose-500 animate-pulse inline-block">❤️</span> by
+            <div className="px-4 py-4 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/5 border border-outline/20 text-center shadow-inner mb-6">
+              <p className="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold mb-1">
+                Built with <span className="text-error animate-pulse inline-block">❤️</span> by
               </p>
-              <a href="https://github.com/jaskaransingh781" target="_blank" rel="noreferrer" className="text-lg font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400 tracking-tight hover:opacity-80 transition-opacity">
+              <a href="https://github.com/jaskaransingh781" target="_blank" rel="noreferrer" className="text-lg font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary tracking-tight hover:opacity-80 transition-opacity">
                 Jaskaran Singh
               </a>
             </div>
 
             <button 
               onClick={() => setIsSupportOpen(false)}
-              className="w-full py-3 bg-white/5 border border-white/10 hover:bg-white/10 text-white rounded-xl font-bold transition-all active:scale-95"
+              className="w-full py-3 bg-black/5 dark:bg-white/5 border border-outline/20 hover:bg-black/10 dark:hover:bg-white/10 text-on-surface rounded-xl font-bold transition-all active:scale-95"
             >
               Close
             </button>

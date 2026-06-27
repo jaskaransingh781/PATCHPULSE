@@ -91,7 +91,7 @@ const Settings = () => {
             </div>
 
             {/* Setting Item */}
-            <div className="p-5 flex justify-between items-center hover:bg-white/[0.02] transition-colors">
+            <div className="p-5 flex justify-between items-center hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors">
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 rounded-full bg-error/20 flex items-center justify-center">
                   <span className="material-symbols-outlined text-error">cloud_sync</span>
@@ -115,7 +115,7 @@ const Settings = () => {
 
         {/* System Info */}
         <div className="glass-panel rounded-2xl overflow-hidden mb-20 md:mb-0">
-          <div className="p-4 bg-white/5 border-b border-white/10">
+          <div className="p-4 bg-black/5 dark:bg-white/5 border-b border-black/10 dark:border-white/10">
             <h3 className="font-label-md text-on-surface-variant font-bold uppercase tracking-wider">System Information</h3>
           </div>
           <div className="p-5 space-y-3">

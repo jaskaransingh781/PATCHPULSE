@@ -201,16 +201,16 @@ const ReportBottomSheet = () => {
       />
 
       {/* Sheet / Panel */}
-      <div className="relative w-full max-w-xl md:rounded-[40px] rounded-t-[40px] backdrop-blur-3xl bg-[#121620]/90 border border-white/20 shadow-[0_32px_128px_rgba(0,0,0,0.8)] overflow-hidden animate-in slide-in-from-bottom duration-500">
+      <div className="relative w-full max-w-xl md:rounded-[40px] rounded-t-[40px] backdrop-blur-3xl bg-surface/90 border border-outline/20 shadow-[0_32px_128px_rgba(0,0,0,0.3)] dark:shadow-[0_32px_128px_rgba(0,0,0,0.8)] overflow-hidden animate-in slide-in-from-bottom duration-500">
         <div className="p-8 space-y-8">
           <header className="flex items-center justify-between">
             <div>
-              <h2 className="text-3xl font-bold tracking-tight text-white">Report Issue</h2>
-              <p className="text-slate-400 mt-1">Civic anomalies are triaged instantly by AI.</p>
+              <h2 className="text-3xl font-bold tracking-tight text-on-surface">Report Issue</h2>
+              <p className="text-on-surface-variant mt-1">Civic anomalies are triaged instantly by AI.</p>
             </div>
             <button 
               onClick={() => setReportFormOpen(false)}
-              className="w-10 h-10 bg-white/5 border border-white/10 rounded-full flex items-center justify-center hover:bg-white/10 text-white"
+              className="w-10 h-10 bg-black/5 dark:bg-white/5 border border-outline/20 rounded-full flex items-center justify-center hover:bg-black/10 dark:hover:bg-white/10 text-on-surface"
             >
               <X size={20} />
             </button>
@@ -224,7 +224,7 @@ const ReportBottomSheet = () => {
                   key={cat}
                   onClick={() => setForm({ ...form, category: cat })}
                   className={`p-4 rounded-2xl border text-sm font-bold text-left transition-all ${
-                    form.category === cat ? 'bg-indigo-500/20 border-indigo-500 text-indigo-100 shadow-[0_0_20px_rgba(79,70,229,0.3)]' : 'bg-white/5 border-white/10 text-slate-400 hover:bg-white/10'
+                    form.category === cat ? 'bg-primary/20 border-primary text-primary shadow-[0_0_20px_rgba(79,70,229,0.2)]' : 'bg-black/5 dark:bg-white/5 border-outline/20 text-on-surface-variant hover:bg-black/10 dark:hover:bg-white/10'
                   }`}
                 >
                   {cat}
@@ -234,14 +234,14 @@ const ReportBottomSheet = () => {
 
             {/* GPS Trigger */}
             <div className="space-y-3">
-              <div className="bg-white/5 border border-white/10 rounded-2xl p-6 flex items-center justify-between group">
+              <div className="bg-black/5 dark:bg-white/5 border border-outline/20 rounded-2xl p-6 flex items-center justify-between group">
                 <div className="flex items-center gap-4">
-                  <div className={`p-3 rounded-xl transition-all ${loadingGps ? 'bg-blue-500/20 text-blue-400' : (manualLocation ? 'bg-emerald-500/20 text-emerald-400' : 'bg-white/10 text-slate-300')}`}>
+                  <div className={`p-3 rounded-xl transition-all ${loadingGps ? 'bg-blue-500/20 text-blue-400' : (manualLocation ? 'bg-emerald-500/20 text-emerald-400' : 'bg-black/10 dark:bg-white/10 text-on-surface-variant')}`}>
                     {loadingGps ? <Loader2 className="animate-spin" /> : <MapPin />}
                   </div>
                   <div>
-                    <p className="text-sm font-bold text-white">Location Data</p>
-                    <p className="text-xs text-slate-400">
+                    <p className="text-sm font-bold text-on-surface">Location Data</p>
+                    <p className="text-xs text-on-surface-variant">
                       {manualLocation ? 'Manual Pin Dropped' : (loadingGps ? 'Syncing with satellites...' : '1400 Civic Center Dr, Block 4')}
                     </p>
                   </div>
@@ -268,11 +268,11 @@ const ReportBottomSheet = () => {
               {/* Landmark Input */}
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <MapPin size={16} className="text-slate-400" />
+                  <MapPin size={16} className="text-on-surface-variant" />
                 </div>
                 <input 
                   type="text" 
-                  className="w-full bg-white/5 border border-white/10 rounded-2xl py-3 pl-10 pr-4 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-indigo-500/50 transition-all"
+                  className="w-full bg-black/5 dark:bg-white/5 border border-outline/20 rounded-2xl py-3 pl-10 pr-4 text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary/50 transition-all"
                   placeholder="Add nearby landmark (optional)"
                   value={form.landmark}
                   onChange={(e) => setForm({ ...form, landmark: e.target.value })}
@@ -284,7 +284,7 @@ const ReportBottomSheet = () => {
             <div className="flex gap-4">
               <button 
                 onClick={() => fileInputRef.current?.click()}
-                className="flex-shrink-0 w-24 h-24 bg-white/5 border-2 border-dashed border-white/20 rounded-2xl flex flex-col items-center justify-center gap-2 text-slate-400 hover:border-indigo-500/50 hover:text-indigo-400 transition-all overflow-hidden relative group"
+                className="flex-shrink-0 w-24 h-24 bg-black/5 dark:bg-white/5 border-2 border-dashed border-outline/30 rounded-2xl flex flex-col items-center justify-center gap-2 text-on-surface-variant hover:border-primary/50 hover:text-primary transition-all overflow-hidden relative group"
               >
                 {preview ? (
                   <>
@@ -310,7 +310,7 @@ const ReportBottomSheet = () => {
               />
               <div className="flex-1 relative">
                 <textarea 
-                  className="w-full h-full bg-white/5 border border-white/10 rounded-2xl p-4 pr-12 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-indigo-500/50 transition-all resize-none"
+                  className="w-full h-full bg-black/5 dark:bg-white/5 border border-outline/20 rounded-2xl p-4 pr-12 text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary/50 transition-all resize-none"
                   placeholder="Provide any additional details about the hazard..."
                   rows="3"
                   value={form.description}
@@ -320,7 +320,7 @@ const ReportBottomSheet = () => {
                   type="button"
                   onClick={toggleRecording}
                   title={isRecording ? "Stop Recording" : "Use Microphone"}
-                  className={`absolute bottom-3 right-3 p-2 rounded-full transition-all ${isRecording ? 'bg-emerald-500/20 text-emerald-400 animate-pulse border border-emerald-500/30' : 'bg-white/10 text-slate-400 hover:bg-indigo-500/20 hover:text-indigo-400 border border-transparent'}`}
+                  className={`absolute bottom-3 right-3 p-2 rounded-full transition-all ${isRecording ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 animate-pulse border border-emerald-500/30' : 'bg-black/10 dark:bg-white/10 text-on-surface-variant hover:bg-primary/20 hover:text-primary border border-transparent'}`}
                 >
                   {isRecording ? <Check size={16} /> : <Mic size={16} />}
                 </button>
@@ -344,7 +344,7 @@ const ReportBottomSheet = () => {
           <footer className="flex gap-4">
             <button 
               onClick={() => setReportFormOpen(false)}
-              className="flex-1 py-4 rounded-2xl border border-white/10 text-sm font-bold text-white hover:bg-white/5 transition-all"
+              className="flex-1 py-4 rounded-2xl border border-outline/20 text-sm font-bold text-on-surface hover:bg-black/5 dark:hover:bg-white/5 transition-all"
             >
               Cancel
             </button>

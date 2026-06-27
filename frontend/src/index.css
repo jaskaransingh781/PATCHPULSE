@@ -9,6 +9,106 @@
   -webkit-font-smoothing: antialiased;
 }
 
+:root {
+  --color-on-background: 26 27 33;
+  --color-outline-variant: 199 197 208;
+  --color-error-container: 255 218 214;
+  --color-secondary: 83 94 120;
+  --color-on-error: 255 255 255;
+  --color-surface-container: 243 243 250;
+  --color-on-primary: 255 255 255;
+  --color-surface-container-high: 237 238 244;
+  --color-tertiary-fixed: 255 219 204;
+  --color-surface-container-low: 249 249 255;
+  --color-error: 186 26 26;
+  --color-on-secondary: 255 255 255;
+  --color-secondary-fixed-dim: 173 198 255;
+  --color-on-tertiary: 255 255 255;
+  --color-surface-dim: 218 221 221;
+  --color-secondary-container: 216 226 255;
+  --color-on-tertiary-fixed-variant: 123 47 0;
+  --color-tertiary: 119 87 72;
+  --color-surface: 253 248 253;
+  --color-on-tertiary-container: 44 21 10;
+  --color-primary-fixed-dim: 195 192 255;
+  --color-surface-bright: 253 248 253;
+  --color-tertiary-fixed-dim: 255 182 149;
+  --color-on-secondary-fixed: 0 26 66;
+  --color-on-tertiary-fixed: 53 16 0;
+  --color-inverse-primary: 195 192 255;
+  --color-on-surface-variant: 70 69 85;
+  --color-on-secondary-container: 15 27 50;
+  --color-on-secondary-fixed-variant: 0 67 149;
+  --color-outline: 119 118 128;
+  --color-inverse-surface: 44 48 59;
+  --color-secondary-fixed: 216 226 255;
+  --color-surface-tint: 79 70 229;
+  --color-surface-container-highest: 232 232 238;
+  --color-surface-variant: 227 225 236;
+  --color-on-error-container: 65 0 2;
+  --color-primary-container: 226 223 255;
+  --color-primary: 79 70 229;
+  --color-primary-fixed: 226 223 255;
+  --color-on-primary-fixed: 15 0 105;
+  --color-surface-container-lowest: 255 255 255;
+  --color-tertiary-container: 255 210 190;
+  --color-inverse-on-surface: 243 243 250;
+  --color-on-primary-container: 10 0 107;
+  --color-on-primary-fixed-variant: 51 35 204;
+  --color-background: 253 248 253;
+  --color-on-surface: 26 27 33;
+}
+
+.dark {
+  --color-on-background: 223 226 241;
+  --color-outline-variant: 70 69 85;
+  --color-error-container: 147 0 10;
+  --color-secondary: 173 198 255;
+  --color-on-error: 105 0 5;
+  --color-surface-container: 28 31 42;
+  --color-on-primary: 29 0 165;
+  --color-surface-container-high: 38 42 53;
+  --color-tertiary-fixed: 255 219 204;
+  --color-surface-container-low: 23 27 38;
+  --color-error: 255 180 171;
+  --color-on-secondary: 0 46 106;
+  --color-secondary-fixed-dim: 173 198 255;
+  --color-on-tertiary: 87 31 0;
+  --color-surface-dim: 15 19 29;
+  --color-secondary-container: 5 102 217;
+  --color-on-tertiary-fixed-variant: 123 47 0;
+  --color-tertiary: 255 182 149;
+  --color-surface: 15 19 29;
+  --color-on-tertiary-container: 255 210 190;
+  --color-primary-fixed-dim: 195 192 255;
+  --color-surface-bright: 53 57 68;
+  --color-tertiary-fixed-dim: 255 182 149;
+  --color-on-secondary-fixed: 0 26 66;
+  --color-on-tertiary-fixed: 53 16 0;
+  --color-inverse-primary: 77 68 227;
+  --color-on-surface-variant: 199 196 216;
+  --color-on-secondary-container: 230 236 255;
+  --color-on-secondary-fixed-variant: 0 67 149;
+  --color-outline: 145 143 161;
+  --color-inverse-surface: 223 226 241;
+  --color-secondary-fixed: 216 226 255;
+  --color-surface-tint: 195 192 255;
+  --color-surface-container-highest: 49 53 64;
+  --color-surface-variant: 49 53 64;
+  --color-on-error-container: 255 218 214;
+  --color-primary-container: 79 70 229;
+  --color-primary: 195 192 255;
+  --color-primary-fixed: 226 223 255;
+  --color-on-primary-fixed: 15 0 105;
+  --color-surface-container-lowest: 10 14 24;
+  --color-tertiary-container: 164 65 0;
+  --color-inverse-on-surface: 44 48 59;
+  --color-on-primary-container: 218 215 255;
+  --color-on-primary-fixed-variant: 51 35 204;
+  --color-background: 15 19 29;
+  --color-on-surface: 223 226 241;
+}
+
 html, body, #root {
   width: 100%;
   min-height: 100vh;
@@ -35,19 +135,19 @@ html, body, #root {
 
 @layer utilities {
   .glass-panel {
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: rgb(var(--color-on-background) / 0.05);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgb(var(--color-outline) / 0.2);
   }
 
   .map-bg {
-      background-color: #0B0F19; /* Base layer */
+      background-color: rgb(var(--color-background));
       background-image: 
-          radial-gradient(circle at 20% 30%, rgba(79, 70, 229, 0.15) 0%, transparent 40%),
-          radial-gradient(circle at 80% 70%, rgba(79, 70, 229, 0.1) 0%, transparent 40%),
-          linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+          radial-gradient(circle at 20% 30%, rgb(var(--color-primary) / 0.15) 0%, transparent 40%),
+          radial-gradient(circle at 80% 70%, rgb(var(--color-primary) / 0.1) 0%, transparent 40%),
+          linear-gradient(rgb(var(--color-on-background) / 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgb(var(--color-on-background) / 0.03) 1px, transparent 1px);
       background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
   }
 }
@@ -71,6 +171,6 @@ html, body, #root {
 }
 .issue-row.resolved-state {
     opacity: 0.7;
-    background: rgba(255,255,255,0.05) !important;
-    border-color: rgba(255,255,255,0.1) !important;
+    background: rgb(var(--color-on-background) / 0.05) !important;
+    border-color: rgb(var(--color-on-background) / 0.1) !important;
 }

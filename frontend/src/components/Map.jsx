@@ -56,7 +56,7 @@ const Map = ({ issues, onMapClick, manualLocation, handleUpvote, selectedIssue, 
     }
   }, [issues]);
 
-  if (!isLoaded) return <div className="flex items-center justify-center h-full bg-[#0B0F19]">Loading Map...</div>;
+  if (!isLoaded) return <div className="flex items-center justify-center h-full bg-background text-on-surface">Loading Map...</div>;
 
   return (
     <GoogleMap
