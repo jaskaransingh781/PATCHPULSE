@@ -25,29 +25,63 @@ const ReportBottomSheet = () => {
   const [isRecording, setIsRecording] = useState(false);
   const fileInputRef = useRef(null);
 
-  const startRecording = () => {
+  const recognitionRef = useRef(null);
+
+  const toggleRecording = () => {
+    if (isRecording) {
+      recognitionRef.current?.stop();
+      setIsRecording(false);
+      return;
+    }
+
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
       alert("Your browser does not support voice input.");
       return;
     }
+    
     const recognition = new SpeechRecognition();
-    recognition.continuous = false;
-    recognition.interimResults = false;
+    recognitionRef.current = recognition;
+    recognition.continuous = true;
+    recognition.interimResults = true;
     recognition.lang = 'en-US';
 
+    let finalTranscript = form.description;
+
     recognition.onstart = () => setIsRecording(true);
+    
     recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript;
-      setForm(prev => ({ ...prev, description: prev.description + (prev.description ? ' ' : '') + transcript }));
+      let interimTranscript = '';
+      let currentFinal = '';
+      
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
+        if (event.results[i].isFinal) {
+          currentFinal += event.results[i][0].transcript;
+        } else {
+          interimTranscript += event.results[i][0].transcript;
+        }
+      }
+      
+      finalTranscript = finalTranscript + (finalTranscript && currentFinal ? ' ' : '') + currentFinal;
+      
+      setForm(prev => ({ 
+        ...prev, 
+        description: finalTranscript + (interimTranscript ? ' ' + interimTranscript : '') 
+      }));
     };
+    
     recognition.onerror = (event) => {
-      console.error(event.error);
+      console.error('Speech recognition error', event.error);
       setIsRecording(false);
     };
+    
     recognition.onend = () => setIsRecording(false);
     
-    recognition.start();
+    try {
+      recognition.start();
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const handleGpsFetch = () => {
@@ -279,7 +313,7 @@ const ReportBottomSheet = () => {
                 />
                 <button
                   type="button"
-                  onClick={startRecording}
+                  onClick={toggleRecording}
                   title="Use Microphone"
                   className={`absolute bottom-3 right-3 p-2 rounded-full transition-all ${isRecording ? 'bg-red-500/20 text-red-500 animate-pulse' : 'bg-white/10 text-slate-400 hover:bg-indigo-500/20 hover:text-indigo-400'}`}
                 >
